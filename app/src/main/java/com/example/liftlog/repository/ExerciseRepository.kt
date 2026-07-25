@@ -28,4 +28,8 @@ class ExerciseRepository(
     suspend fun logSet(exerciseId: Int, weight: Float, reps: Int) {
         logSetDao.insertSet(LogSetEntity(exerciseId = exerciseId, weight = weight, reps = reps))
     }
+
+    suspend fun deleteExercise(exercise: ExerciseEntity) {
+        exerciseDao.deleteExercise(exercise)
+    }
 }
