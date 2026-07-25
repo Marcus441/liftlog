@@ -1,5 +1,26 @@
 package com.example.liftlog.repository
 
-class ExerciseRepository {
-    
+import com.example.liftlog.data.local.dao.ExerciseDao
+import com.example.liftlog.data.local.dao.LogSetDao
+import com.example.liftlog.data.local.entities.ExerciseEntity
+import com.example.liftlog.data.local.entities.LogSetEntity
+import kotlinx.coroutines.flow.Flow
+
+class ExerciseRepository(
+    private val exerciseDao: ExerciseDao,
+    private val logSetDao: LogSetDao
+) {
+    val allExercises: Flow<List<ExerciseEntity>> = exerciseDao.getAllExercises()
+
+    suspend fun addExercise(name: String) {
+        exerciseDao.insertExercises(ExerciseEntity(name = name))
+    }
+
+    fun getSetsForExercise(exerciseId: Int): Flow<List<LogSetEntity>> {
+        return logSetDao.getSetsForExercise(exerciseId)
+    }
+
+    suspend fun logSet(exerciseId: Int, weight: Float, reps: Int) {
+        logSetDao.insertSet(LogSetEntity(exerciseId = exerciseId, weight = weight, reps = reps))
+    }
 }
