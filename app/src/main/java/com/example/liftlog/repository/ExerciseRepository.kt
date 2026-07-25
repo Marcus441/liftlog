@@ -12,8 +12,13 @@ class ExerciseRepository(
 ) {
     val allExercises: Flow<List<ExerciseEntity>> = exerciseDao.getAllExercises()
 
+    suspend fun addExercises(exerciseNames: List<String>) {
+        val exercises = exerciseNames.map { name -> ExerciseEntity(name = name) }
+        exerciseDao.insertExercises(exercises)
+    }
+
     suspend fun addExercise(name: String) {
-        exerciseDao.insertExercises(ExerciseEntity(name = name))
+        exerciseDao.insertExercise(ExerciseEntity(name = name))
     }
 
     fun getSetsForExercise(exerciseId: Int): Flow<List<LogSetEntity>> {
