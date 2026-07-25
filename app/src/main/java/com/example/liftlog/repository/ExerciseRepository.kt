@@ -1,5 +1,7 @@
 package com.example.liftlog.repository
 
+import androidx.room.withTransaction
+import com.example.liftlog.data.local.AppDatabase
 import com.example.liftlog.data.local.dao.ExerciseDao
 import com.example.liftlog.data.local.dao.LogSetDao
 import com.example.liftlog.data.local.entities.ExerciseEntity
@@ -7,6 +9,7 @@ import com.example.liftlog.data.local.entities.LogSetEntity
 import kotlinx.coroutines.flow.Flow
 
 class ExerciseRepository(
+    private val database: AppDatabase,
     private val exerciseDao: ExerciseDao,
     private val logSetDao: LogSetDao
 ) {
@@ -30,6 +33,9 @@ class ExerciseRepository(
     }
 
     suspend fun deleteExercise(exercise: ExerciseEntity) {
-        exerciseDao.deleteExercise(exercise)
+        database.withTransaction {
+            exerciseDao.deleteExercise(exercise)
+            logSetDao.deleteSetsForExercise(exercise.id)
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.liftlog.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,4 +15,7 @@ interface LogSetDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSet(set: LogSetEntity)
+
+    @Query("DELETE FROM log_sets WHERE exerciseId = :exerciseId")
+    suspend fun deleteSetsForExercise(exerciseId: Int): Int
 }
