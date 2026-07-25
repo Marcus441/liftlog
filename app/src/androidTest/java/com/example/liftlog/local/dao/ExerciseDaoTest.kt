@@ -8,7 +8,6 @@ import com.example.liftlog.data.local.AppDatabase
 import com.example.liftlog.data.local.dao.ExerciseDao
 import com.example.liftlog.data.local.dao.LogSetDao
 import com.example.liftlog.data.local.entities.ExerciseEntity
-import com.example.liftlog.data.local.entities.LogSetEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -55,6 +54,7 @@ class ExerciseDaoTest {
         Assert.assertEquals("Barbell Squat", allExercises[0].name)
 
     }
+
     @Test
     fun insertExercise_and_read_it_back() = runBlocking {
 

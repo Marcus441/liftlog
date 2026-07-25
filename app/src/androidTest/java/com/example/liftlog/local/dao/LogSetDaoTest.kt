@@ -38,7 +38,7 @@ class LogSetDaoTest {
     fun teardown() {
         database.close()
     }
-    
+
     @Test
     fun insertSet_for_exercise_returns_correct_sets() = runBlocking {
         exerciseDao.insertExercise(ExerciseEntity(id = 10, name = "Squat"))
