@@ -1,11 +1,15 @@
 package com.example.liftlog.data.local.dao
 
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.liftlog.data.local.entities.ExerciseEntity
-import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ExerciseDao{
+interface ExerciseDao {
     @Query("SELECT * FROM exercises ORDER BY name ASC")
     fun getAllExercises(): Flow<List<ExerciseEntity>>
 
