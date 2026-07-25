@@ -65,7 +65,7 @@ fun SetLoggingScreen(
             OutlinedTextField(
                 value = weightInput,
                 onValueChange = { weightInput = it },
-                label = { Text("Weight (lbs)") },
+                label = { Text("Weight (kg)") },
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(8.dp))
@@ -108,7 +108,7 @@ fun SetLoggingScreen(
                             .padding(16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("${set.weight} lbs")
+                        Text("${set.weight} kg")
                         Text("${set.reps} reps")
                     }
                 }
