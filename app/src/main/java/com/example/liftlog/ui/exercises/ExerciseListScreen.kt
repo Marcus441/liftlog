@@ -1,6 +1,5 @@
 package com.example.liftlog.ui.exercises
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.liftlog.ui.components.SwipeToDeleteContainer
 
 @Composable
 fun ExerciseListScreen(
@@ -67,19 +67,30 @@ fun ExerciseListScreen(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(
+                items = exerciseList,
+                key = { exercise -> exercise.id }
+            ) { exercise ->
+                SwipeToDeleteContainer(
+                    onDelete = { viewModel.deleteExercise(exercise) },
 
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(exerciseList) { exercise ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onExerciseClick(exercise.id, exercise.name) }
-                ) {
-                    Text(
-                        text = exercise.name,
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                    ) {
+                    Card(
+                        onClick = {onExerciseClick(exercise.id, exercise.name)},
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(exercise.name)
+                        }
+                    }
                 }
             }
         }
