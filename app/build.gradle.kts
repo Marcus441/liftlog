@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 val appName: String by project
@@ -29,15 +30,13 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro",
             )
         }
     }
 
-    buildFeatures {
-        compose = true
-    }
+    buildFeatures { compose = true }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -45,13 +44,18 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
+kotlin { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
 
 dependencies {
+    val roomVersion = "2.8.4"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-rxjava3:$roomVersion")
+    implementation("androidx.room:room-guava:$roomVersion")
+    testImplementation("androidx.room:room-testing:$roomVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
