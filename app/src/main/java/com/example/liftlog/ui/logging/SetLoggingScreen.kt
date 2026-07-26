@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.liftlog.ui.components.BackButton
 import com.example.liftlog.ui.logging.components.LogSetInput
+import com.example.liftlog.ui.logging.components.LoggedSetItem
 
 @Composable
 fun SetLoggingScreen(
@@ -81,17 +82,7 @@ fun SetLoggingScreen(
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(loggedSets) { set ->
-                Card(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("${set.weight} kg")
-                        Text("${set.reps} reps")
-                    }
-                }
+                LoggedSetItem(set = set)
             }
         }
     }
