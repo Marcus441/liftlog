@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.liftlog.ui.components.BackButton
 
 @Composable
 fun SetLoggingScreen(
@@ -45,12 +46,7 @@ fun SetLoggingScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        IconButton(onClick = onBackClick, Modifier.size(32.dp)) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Navigate Back"
-            )
-        }
+        BackButton(onBackClick)
 
         Spacer(modifier = Modifier.height(8.dp))
 
