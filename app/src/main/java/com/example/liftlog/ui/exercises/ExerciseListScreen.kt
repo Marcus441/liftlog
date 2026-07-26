@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.liftlog.ui.components.SwipeToDeleteContainer
+import com.example.liftlog.ui.exercises.components.AddExerciseInput
 
 @Composable
 fun ExerciseListScreen(
@@ -47,24 +48,14 @@ fun ExerciseListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            OutlinedTextField(
-                value = inputText,
-                onValueChange = { inputText = it },
-                label = { Text("Exercise Name") },
-                modifier = Modifier.weight(1f)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Button(
-                onClick = {
-                    viewModel.addExercise(inputText)
-                    inputText = ""
-                },
-                modifier = Modifier.align(Alignment.CenterVertically)
-            ) {
-                Text("Add")
-            }
-        }
+        AddExerciseInput(
+            exerciseName = inputText,
+            onExerciseNameChange = { inputText = it },
+            onAddClick = {
+                viewModel.addExercise(name = inputText)
+                inputText = ""
+            },
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
@@ -79,7 +70,7 @@ fun ExerciseListScreen(
 
                     ) {
                     Card(
-                        onClick = {onExerciseClick(exercise.id, exercise.name)},
+                        onClick = { onExerciseClick(exercise.id, exercise.name) },
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row(
