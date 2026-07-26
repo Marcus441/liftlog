@@ -9,5 +9,3 @@ data class ExerciseEntity(
     val id: Int = 0,
     val name: String,
 )
-
-

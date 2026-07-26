@@ -27,7 +27,7 @@ fun BackButton(onBackClick: () -> Unit) {
     }, Modifier.size(32.dp)) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Navigate Back"
+            contentDescription = "Navigate Back",
         )
     }
 }

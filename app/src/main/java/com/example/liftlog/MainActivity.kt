@@ -26,36 +26,39 @@ class MainActivity : ComponentActivity() {
 
             NavHost(navController = navController, startDestination = "exercise_list") {
                 composable("exercise_list") {
-                    val viewModel: ExerciseViewModel = viewModel(
-                        factory = ExerciseViewModel.provideFactory(repository)
-                    )
+                    val viewModel: ExerciseViewModel =
+                        viewModel(
+                            factory = ExerciseViewModel.provideFactory(repository),
+                        )
                     ExerciseListScreen(
                         viewModel = viewModel,
                         onExerciseClick = { id, name ->
                             navController.navigate("set_logging/$id/$name")
-                        }
+                        },
                     )
                 }
 
                 composable(
                     route = "set_logging/{exerciseId}/{exerciseName}",
-                    arguments = listOf(
-                        navArgument("exerciseId") { type = NavType.IntType },
-                        navArgument("exerciseName") { type = NavType.StringType }
-                    )
+                    arguments =
+                        listOf(
+                            navArgument("exerciseId") { type = NavType.IntType },
+                            navArgument("exerciseName") { type = NavType.StringType },
+                        ),
                 ) { backStackEntry ->
                     val exerciseId =
                         backStackEntry.arguments?.getInt("exerciseId") ?: return@composable
                     val exerciseName = backStackEntry.arguments?.getString("exerciseName") ?: ""
 
-                    val viewModel: SetLoggingViewModel = viewModel(
-                        factory = SetLoggingViewModel.provideFactory(repository, exerciseId)
-                    )
+                    val viewModel: SetLoggingViewModel =
+                        viewModel(
+                            factory = SetLoggingViewModel.provideFactory(repository, exerciseId),
+                        )
 
                     SetLoggingScreen(
                         exerciseName = exerciseName,
                         viewModel = viewModel,
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStack() },
                     )
                 }
             }

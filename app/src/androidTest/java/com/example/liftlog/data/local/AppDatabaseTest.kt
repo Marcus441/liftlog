@@ -17,7 +17,8 @@ abstract class AppDatabaseTest {
     fun setUpDatabase() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         database =
-            Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
+            Room
+                .inMemoryDatabaseBuilder(context, AppDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
         exerciseDao = database.exerciseDao()

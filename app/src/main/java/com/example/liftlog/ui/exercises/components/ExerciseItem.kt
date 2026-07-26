@@ -21,13 +21,14 @@ fun ExerciseItem(
     SwipeToDeleteContainer(onDelete = onDelete) {
         Card(
             onClick = onClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(exercise.name)
             }

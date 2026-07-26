@@ -21,7 +21,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ExerciseListScreenTest : RepositoryComposeTest() {
-
     @Test
     fun existing_exercises_are_displayed() {
         runBlocking { exerciseDao.insertExercise(ExerciseEntity(name = "Bench Press")) }
@@ -30,7 +29,7 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 ExerciseListScreen(
                     viewModel = viewModel(factory = ExerciseViewModel.provideFactory(repository)),
-                    onExerciseClick = { _, _ -> }
+                    onExerciseClick = { _, _ -> },
                 )
             }
         }
@@ -46,7 +45,7 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 ExerciseListScreen(
                     viewModel = viewModel(factory = ExerciseViewModel.provideFactory(repository)),
-                    onExerciseClick = { _, _ -> }
+                    onExerciseClick = { _, _ -> },
                 )
             }
         }
@@ -73,7 +72,7 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
                     onExerciseClick = { id, name ->
                         clickedId = id
                         clickedName = name
-                    }
+                    },
                 )
             }
         }
@@ -95,7 +94,7 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
         runBlocking {
             exerciseDao.insertExercise(ExerciseEntity(id = exerciseId, name = exerciseName))
             logSetDao.insertSet(
-                LogSetEntity(id = 1, exerciseId = exerciseId, weight = 135f, reps = 5)
+                LogSetEntity(id = 1, exerciseId = exerciseId, weight = 135f, reps = 5),
             )
         }
 
@@ -103,7 +102,7 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 ExerciseListScreen(
                     viewModel = viewModel(factory = ExerciseViewModel.provideFactory(repository)),
-                    onExerciseClick = { _, _ -> }
+                    onExerciseClick = { _, _ -> },
                 )
             }
         }
@@ -126,11 +125,11 @@ class ExerciseListScreenTest : RepositoryComposeTest() {
 
             assertTrue(
                 "Log sets should be empty after parent exercise deletion",
-                remainingSets.isEmpty()
+                remainingSets.isEmpty(),
             )
             assertTrue(
                 "Exercise should no longer exist in database",
-                allExercises.none { it.id == exerciseId }
+                allExercises.none { it.id == exerciseId },
             )
         }
     }

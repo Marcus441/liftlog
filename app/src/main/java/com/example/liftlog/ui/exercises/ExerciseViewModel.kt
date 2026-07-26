@@ -11,15 +11,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ExerciseViewModel(
-    private val repository: ExerciseRepository
+    private val repository: ExerciseRepository,
 ) : ViewModel() {
-
-    val exercises: StateFlow<List<ExerciseEntity>> = repository.allExercises
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    val exercises: StateFlow<List<ExerciseEntity>> =
+        repository.allExercises
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList(),
+            )
 
     fun addExercise(name: String) {
         if (name.isBlank()) return
@@ -39,9 +39,7 @@ class ExerciseViewModel(
         fun provideFactory(repository: ExerciseRepository): ViewModelProvider.Factory =
             object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return ExerciseViewModel(repository) as T
-                }
+                override fun <T : ViewModel> create(modelClass: Class<T>): T = ExerciseViewModel(repository) as T
             }
     }
 }

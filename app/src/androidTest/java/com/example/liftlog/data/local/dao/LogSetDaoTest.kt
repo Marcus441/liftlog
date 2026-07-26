@@ -12,17 +12,17 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LogSetDaoTest : AppDatabaseTest() {
-
     @Test
-    fun inserting_sets_for_an_exercise_returns_them() = runBlocking {
-        exerciseDao.insertExercise(ExerciseEntity(id = 10, name = "Squat"))
+    fun inserting_sets_for_an_exercise_returns_them() =
+        runBlocking {
+            exerciseDao.insertExercise(ExerciseEntity(id = 10, name = "Squat"))
 
-        logSetDao.insertSet(LogSetEntity(exerciseId = 10, weight = 225f, reps = 5))
-        logSetDao.insertSet(LogSetEntity(exerciseId = 10, weight = 225f, reps = 5))
+            logSetDao.insertSet(LogSetEntity(exerciseId = 10, weight = 225f, reps = 5))
+            logSetDao.insertSet(LogSetEntity(exerciseId = 10, weight = 225f, reps = 5))
 
-        val sets = logSetDao.getSetsForExercise(10).first()
+            val sets = logSetDao.getSetsForExercise(10).first()
 
-        assertEquals(2, sets.size)
-        assertEquals(225f, sets[0].weight)
-    }
+            assertEquals(2, sets.size)
+            assertEquals(225f, sets[0].weight)
+        }
 }

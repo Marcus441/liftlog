@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 class ExerciseRepository(
     private val database: AppDatabase,
     private val exerciseDao: ExerciseDao,
-    private val logSetDao: LogSetDao
+    private val logSetDao: LogSetDao,
 ) {
     val allExercises: Flow<List<ExerciseEntity>> = exerciseDao.getAllExercises()
 
@@ -24,11 +24,13 @@ class ExerciseRepository(
         exerciseDao.insertExercise(ExerciseEntity(name = name))
     }
 
-    fun getSetsForExercise(exerciseId: Int): Flow<List<LogSetEntity>> {
-        return logSetDao.getSetsForExercise(exerciseId)
-    }
+    fun getSetsForExercise(exerciseId: Int): Flow<List<LogSetEntity>> = logSetDao.getSetsForExercise(exerciseId)
 
-    suspend fun logSet(exerciseId: Int, weight: Float, reps: Int) {
+    suspend fun logSet(
+        exerciseId: Int,
+        weight: Float,
+        reps: Int,
+    ) {
         logSetDao.insertSet(LogSetEntity(exerciseId = exerciseId, weight = weight, reps = reps))
     }
 

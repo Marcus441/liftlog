@@ -17,40 +17,46 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SwipeToDeleteContainer(onDelete: () -> Unit, content: @Composable () -> Unit) {
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = { dismissValue ->
-            if (dismissValue == SwipeToDismissBoxValue.EndToStart) {
-                onDelete()
-                true
-            } else {
-                false
-            }
-        }
-    )
+fun SwipeToDeleteContainer(
+    onDelete: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    val dismissState =
+        rememberSwipeToDismissBoxState(
+            confirmValueChange = { dismissValue ->
+                if (dismissValue == SwipeToDismissBoxValue.EndToStart) {
+                    onDelete()
+                    true
+                } else {
+                    false
+                }
+            },
+        )
     SwipeToDismissBox(
         state = dismissState,
         enableDismissFromStartToEnd = false,
         backgroundContent = {
-            val color = when (dismissState.targetValue) {
-                SwipeToDismissBoxValue.EndToStart -> Color.Red
-                else -> Color.Transparent
-            }
+            val color =
+                when (dismissState.targetValue) {
+                    SwipeToDismissBoxValue.EndToStart -> Color.Red
+                    else -> Color.Transparent
+                }
 
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color)
-                    .padding(horizontal = 20.dp),
-                contentAlignment = Alignment.CenterEnd
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(color)
+                        .padding(horizontal = 20.dp),
+                contentAlignment = Alignment.CenterEnd,
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Delete",
-                    tint = Color.White
+                    tint = Color.White,
                 )
             }
         },
-        content = { content() }
+        content = { content() },
     )
 }
