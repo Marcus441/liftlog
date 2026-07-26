@@ -20,7 +20,7 @@ fun BackButton(onBackClick: () -> Unit) {
     }
 
     IconButton(onClick = {
-        if (!isClicked){
+        if (!isClicked) {
             isClicked = true
             onBackClick()
         }
