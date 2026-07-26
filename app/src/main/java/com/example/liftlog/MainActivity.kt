@@ -22,8 +22,8 @@ import com.example.liftlog.ui.history.WorkoutHistoryScreen
 import com.example.liftlog.ui.logging.SetLoggingScreen
 import com.example.liftlog.ui.logging.SetLoggingViewModel
 import com.example.liftlog.ui.navigation.Screen
-import com.example.liftlog.ui.navigation.bottomNavScreens
 import com.example.liftlog.ui.navigation.components.BottomNavigationBar
+import com.example.liftlog.ui.navigation.isBottomNavRoute
 import com.example.liftlog.ui.workouts.WorkoutsScreen
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 bottomBar = {
-                    if (bottomNavScreens.any { it.route == currentRoute }) {
+                    if (isBottomNavRoute(currentRoute)) {
                         BottomNavigationBar(
                             currentRoute = currentRoute,
                             onScreenSelected = { screen ->

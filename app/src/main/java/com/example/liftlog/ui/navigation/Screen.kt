@@ -23,3 +23,5 @@ sealed class Screen(
 }
 
 val bottomNavScreens = listOf(Screen.ExerciseCatalog, Screen.WorkoutHistory, Screen.Workouts)
+
+fun isBottomNavRoute(route: String?): Boolean = bottomNavScreens.any { it.route == route }
