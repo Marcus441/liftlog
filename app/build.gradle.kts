@@ -12,7 +12,7 @@ val appId: String by project
 
 android {
     namespace = appId
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = appId
