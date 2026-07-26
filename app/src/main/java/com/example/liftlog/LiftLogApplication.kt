@@ -6,5 +6,11 @@ import com.example.liftlog.repository.ExerciseRepository
 
 class LiftLogApplication : Application() {
     private val database by lazy { AppDatabase.getDatabase(this) }
-    val repository by lazy { ExerciseRepository(database, database.exerciseDao(), database.logSetDao()) }
+    val repository by lazy {
+        ExerciseRepository(
+            database,
+            database.exerciseDao(),
+            database.logSetDao()
+        )
+    }
 }

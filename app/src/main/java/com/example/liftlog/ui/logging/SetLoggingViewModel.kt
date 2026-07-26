@@ -36,7 +36,10 @@ class SetLoggingViewModel(
 
         viewModelScope.launch {
             try {
-                android.util.Log.d("LiftLogDebug", "Attempting DB insert for exerciseId=$exerciseId...")
+                android.util.Log.d(
+                    "LiftLogDebug",
+                    "Attempting DB insert for exerciseId=$exerciseId..."
+                )
                 repository.logSet(
                     exerciseId = exerciseId,
                     weight = weight,
@@ -48,6 +51,7 @@ class SetLoggingViewModel(
             }
         }
     }
+
     companion object {
         fun provideFactory(
             repository: ExerciseRepository,
