@@ -24,7 +24,9 @@ fun ExerciseItem(
             modifier = Modifier.fillMaxWidth()
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(exercise.name)
