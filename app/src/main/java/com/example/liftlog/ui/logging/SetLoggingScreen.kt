@@ -70,7 +70,7 @@ fun SetLoggingScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(loggedSets) { set ->
+            items(items = loggedSets, key = { it.id }) { set ->
                 LoggedSetItem(set = set)
             }
         }
