@@ -8,7 +8,8 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.liftlog.ui.navigation.Screen
+import com.example.liftlog.ui.navigation.BottomNavScreen
+import com.example.liftlog.ui.navigation.Route
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -23,7 +24,7 @@ class BottomNavigationBarTest {
     fun displays_all_bottom_nav_items() {
         composeTestRule.setContent {
             MaterialTheme {
-                BottomNavigationBar(currentRoute = Screen.ExerciseCatalog.route, onScreenSelected = {})
+                BottomNavigationBar(currentRoute = Route.ExerciseList.path, onScreenSelected = {})
             }
         }
 
@@ -36,7 +37,7 @@ class BottomNavigationBarTest {
     fun current_route_item_is_selected() {
         composeTestRule.setContent {
             MaterialTheme {
-                BottomNavigationBar(currentRoute = Screen.WorkoutHistory.route, onScreenSelected = {})
+                BottomNavigationBar(currentRoute = Route.WorkoutHistory.path, onScreenSelected = {})
             }
         }
 
@@ -47,12 +48,12 @@ class BottomNavigationBarTest {
 
     @Test
     fun clicking_a_tab_invokes_the_callback_with_that_screen() {
-        var selectedScreen: Screen? = null
+        var selectedScreen: BottomNavScreen? = null
 
         composeTestRule.setContent {
             MaterialTheme {
                 BottomNavigationBar(
-                    currentRoute = Screen.ExerciseCatalog.route,
+                    currentRoute = Route.ExerciseList.path,
                     onScreenSelected = { selectedScreen = it },
                 )
             }
@@ -60,6 +61,6 @@ class BottomNavigationBarTest {
 
         composeTestRule.onNodeWithText("Workouts").performClick()
 
-        assertEquals(Screen.Workouts, selectedScreen)
+        assertEquals(Route.Workouts, selectedScreen?.route)
     }
 }

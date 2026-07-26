@@ -4,17 +4,17 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class ScreenTest {
+class BottomNavScreenTest {
     @Test
     fun bottom_nav_screens_are_bottom_nav_routes() {
-        assertTrue(isBottomNavRoute(Screen.ExerciseCatalog.route))
-        assertTrue(isBottomNavRoute(Screen.WorkoutHistory.route))
-        assertTrue(isBottomNavRoute(Screen.Workouts.route))
+        assertTrue(isBottomNavRoute(Route.ExerciseList.path))
+        assertTrue(isBottomNavRoute(Route.WorkoutHistory.path))
+        assertTrue(isBottomNavRoute(Route.Workouts.path))
     }
 
     @Test
     fun detail_routes_are_not_bottom_nav_routes() {
-        assertFalse(isBottomNavRoute("set_logging/1/Squat"))
+        assertFalse(isBottomNavRoute(Route.SetLogging.path))
     }
 
     @Test

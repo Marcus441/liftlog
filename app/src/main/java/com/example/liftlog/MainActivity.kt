@@ -21,7 +21,7 @@ import com.example.liftlog.ui.exercises.ExerciseViewModel
 import com.example.liftlog.ui.history.WorkoutHistoryScreen
 import com.example.liftlog.ui.logging.SetLoggingScreen
 import com.example.liftlog.ui.logging.SetLoggingViewModel
-import com.example.liftlog.ui.navigation.Screen
+import com.example.liftlog.ui.navigation.Route
 import com.example.liftlog.ui.navigation.components.BottomNavigationBar
 import com.example.liftlog.ui.navigation.isBottomNavRoute
 import com.example.liftlog.ui.workouts.WorkoutsScreen
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         BottomNavigationBar(
                             currentRoute = currentRoute,
                             onScreenSelected = { screen ->
-                                navController.navigate(screen.route) {
+                                navController.navigate(screen.route.path) {
                                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                                     launchSingleTop = true
                                     restoreState = true
@@ -58,10 +58,10 @@ class MainActivity : ComponentActivity() {
             ) { innerPadding ->
                 NavHost(
                     navController = navController,
-                    startDestination = Screen.ExerciseCatalog.route,
+                    startDestination = Route.ExerciseList.path,
                     modifier = Modifier.padding(innerPadding),
                 ) {
-                    composable(Screen.ExerciseCatalog.route) {
+                    composable(Route.ExerciseList.path) {
                         val viewModel: ExerciseViewModel =
                             viewModel(
                                 factory = ExerciseViewModel.provideFactory(repository),
@@ -69,22 +69,24 @@ class MainActivity : ComponentActivity() {
                         ExerciseListScreen(
                             viewModel = viewModel,
                             onExerciseClick = { id, name ->
-                                navController.navigate("set_logging/$id/$name")
+                                navController.navigate(Route.SetLogging.build(id, name))
                             },
                         )
                     }
 
                     composable(
-                        route = "set_logging/{exerciseId}/{exerciseName}",
+                        route = Route.SetLogging.path,
                         arguments =
                             listOf(
-                                navArgument("exerciseId") { type = NavType.IntType },
-                                navArgument("exerciseName") { type = NavType.StringType },
+                                navArgument(Route.SetLogging.ARG_EXERCISE_ID) { type = NavType.IntType },
+                                navArgument(Route.SetLogging.ARG_EXERCISE_NAME) { type = NavType.StringType },
                             ),
                     ) { backStackEntry ->
                         val exerciseId =
-                            backStackEntry.arguments?.getInt("exerciseId") ?: return@composable
-                        val exerciseName = backStackEntry.arguments?.getString("exerciseName") ?: ""
+                            backStackEntry.arguments?.getInt(Route.SetLogging.ARG_EXERCISE_ID)
+                                ?: return@composable
+                        val exerciseName =
+                            backStackEntry.arguments?.getString(Route.SetLogging.ARG_EXERCISE_NAME) ?: ""
 
                         val viewModel: SetLoggingViewModel =
                             viewModel(
@@ -98,11 +100,11 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    composable(Screen.WorkoutHistory.route) {
+                    composable(Route.WorkoutHistory.path) {
                         WorkoutHistoryScreen()
                     }
 
-                    composable(Screen.Workouts.route) {
+                    composable(Route.Workouts.path) {
                         WorkoutsScreen()
                     }
                 }
