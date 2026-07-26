@@ -28,7 +28,7 @@ class AddExerciseInputTest {
                 AddExerciseInput(
                     exerciseName = "Squat",
                     onExerciseNameChange = {},
-                    onAddClick = {}
+                    onAddClick = {},
                 )
             }
         }
@@ -44,7 +44,7 @@ class AddExerciseInputTest {
                 AddExerciseInput(
                     exerciseName = exerciseName,
                     onExerciseNameChange = { exerciseName = it },
-                    onAddClick = {}
+                    onAddClick = {},
                 )
             }
         }
@@ -63,7 +63,7 @@ class AddExerciseInputTest {
                 AddExerciseInput(
                     exerciseName = "Squat",
                     onExerciseNameChange = {},
-                    onAddClick = { addClicked = true }
+                    onAddClick = { addClicked = true },
                 )
             }
         }

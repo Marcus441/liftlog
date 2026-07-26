@@ -10,7 +10,7 @@ class LiftLogApplication : Application() {
         ExerciseRepository(
             database,
             database.exerciseDao(),
-            database.logSetDao()
+            database.logSetDao(),
         )
     }
 }

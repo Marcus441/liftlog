@@ -26,16 +26,17 @@ import com.example.liftlog.ui.logging.components.LoggedSetItem
 fun SetLoggingScreen(
     exerciseName: String,
     viewModel: SetLoggingViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     val loggedSets by viewModel.loggedSets.collectAsState()
     var weightInput by remember { mutableStateOf("") }
     var repsInput by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
     ) {
         BackButton(onBackClick)
 
@@ -43,7 +44,7 @@ fun SetLoggingScreen(
 
         Text(
             text = exerciseName,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -57,14 +58,14 @@ fun SetLoggingScreen(
                 viewModel.logSet(weightInput, repsInput)
                 weightInput = ""
                 repsInput = ""
-            }
+            },
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = "Logged History",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
         )
 
         Spacer(modifier = Modifier.height(8.dp))

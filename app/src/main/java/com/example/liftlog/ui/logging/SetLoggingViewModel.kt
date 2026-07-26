@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.liftlog.data.local.entities.LogSetEntity
 import com.example.liftlog.repository.ExerciseRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -13,19 +12,21 @@ import kotlinx.coroutines.launch
 
 class SetLoggingViewModel(
     private val repository: ExerciseRepository,
-    private val exerciseId: Int
+    private val exerciseId: Int,
 ) : ViewModel() {
+    val loggedSets: StateFlow<List<LogSetEntity>> =
+        repository
+            .getSetsForExercise(exerciseId)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList(),
+            )
 
-    private val _selectedExerciseId = MutableStateFlow<Int?>(null)
-
-    val loggedSets: StateFlow<List<LogSetEntity>> = repository.getSetsForExercise(exerciseId)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
-
-    fun logSet(weightString: String, repsString: String) {
+    fun logSet(
+        weightString: String,
+        repsString: String,
+    ) {
         val weight = weightString.trim().replace(',', '.').toFloatOrNull()
         val reps = repsString.trim().toIntOrNull()
 
@@ -38,12 +39,12 @@ class SetLoggingViewModel(
             try {
                 android.util.Log.d(
                     "LiftLogDebug",
-                    "Attempting DB insert for exerciseId=$exerciseId..."
+                    "Attempting DB insert for exerciseId=$exerciseId...",
                 )
                 repository.logSet(
                     exerciseId = exerciseId,
                     weight = weight,
-                    reps = reps
+                    reps = reps,
                 )
                 android.util.Log.d("LiftLogDebug", "Insert call completed successfully!")
             } catch (e: Exception) {
@@ -55,12 +56,11 @@ class SetLoggingViewModel(
     companion object {
         fun provideFactory(
             repository: ExerciseRepository,
-            exerciseId: Int
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return SetLoggingViewModel(repository, exerciseId) as T
+            exerciseId: Int,
+        ): ViewModelProvider.Factory =
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T = SetLoggingViewModel(repository, exerciseId) as T
             }
-        }
     }
 }

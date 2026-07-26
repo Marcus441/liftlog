@@ -18,27 +18,27 @@ fun LogSetInput(
     onWeightChange: (String) -> Unit,
     repsInput: String,
     onRepsChange: (String) -> Unit,
-    onButtonClick: () -> Unit
+    onButtonClick: () -> Unit,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = weightInput,
             onValueChange = onWeightChange,
             label = { Text("Weight (kg)") },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
         Spacer(modifier = Modifier.width(8.dp))
         OutlinedTextField(
             value = repsInput,
             onValueChange = onRepsChange,
             label = { Text("Reps") },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
     }
     Spacer(modifier = Modifier.height(8.dp))
     Button(
         onClick = onButtonClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Text("Log Set")
     }

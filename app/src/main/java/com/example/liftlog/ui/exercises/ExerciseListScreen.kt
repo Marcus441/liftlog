@@ -24,19 +24,20 @@ import com.example.liftlog.ui.exercises.components.ExerciseItem
 @Composable
 fun ExerciseListScreen(
     viewModel: ExerciseViewModel,
-    onExerciseClick: (exerciseId: Int, name: String) -> Unit
+    onExerciseClick: (exerciseId: Int, name: String) -> Unit,
 ) {
     val exerciseList by viewModel.exercises.collectAsState()
     var inputText by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
     ) {
         Text(
             text = "Exercise Catalog",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -52,16 +53,16 @@ fun ExerciseListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(
                 items = exerciseList,
-                key = { exercise -> exercise.id }
+                key = { exercise -> exercise.id },
             ) { exercise ->
                 ExerciseItem(
                     exercise = exercise,
                     onDelete = { viewModel.deleteExercise(exercise) },
-                    onClick = { onExerciseClick(exercise.id, exercise.name) }
+                    onClick = { onExerciseClick(exercise.id, exercise.name) },
                 )
             }
         }

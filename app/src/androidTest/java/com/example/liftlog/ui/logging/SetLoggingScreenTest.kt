@@ -19,7 +19,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SetLoggingScreenTest : RepositoryComposeTest() {
-
     @Before
     fun seedExercise() {
         runBlocking { exerciseDao.insertExercise(ExerciseEntity(id = 1, name = "Squat")) }
@@ -33,13 +32,15 @@ class SetLoggingScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 SetLoggingScreen(
                     exerciseName = "Squat",
-                    viewModel = viewModel(
-                        factory = SetLoggingViewModel.provideFactory(
-                            repository,
-                            exerciseId = 1
-                        )
-                    ),
-                    onBackClick = {}
+                    viewModel =
+                        viewModel(
+                            factory =
+                                SetLoggingViewModel.provideFactory(
+                                    repository,
+                                    exerciseId = 1,
+                                ),
+                        ),
+                    onBackClick = {},
                 )
             }
         }
@@ -55,13 +56,15 @@ class SetLoggingScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 SetLoggingScreen(
                     exerciseName = "Squat",
-                    viewModel = viewModel(
-                        factory = SetLoggingViewModel.provideFactory(
-                            repository,
-                            exerciseId = 1
-                        )
-                    ),
-                    onBackClick = {}
+                    viewModel =
+                        viewModel(
+                            factory =
+                                SetLoggingViewModel.provideFactory(
+                                    repository,
+                                    exerciseId = 1,
+                                ),
+                        ),
+                    onBackClick = {},
                 )
             }
         }
@@ -83,13 +86,15 @@ class SetLoggingScreenTest : RepositoryComposeTest() {
             MaterialTheme {
                 SetLoggingScreen(
                     exerciseName = "Squat",
-                    viewModel = viewModel(
-                        factory = SetLoggingViewModel.provideFactory(
-                            repository,
-                            exerciseId = 1
-                        )
-                    ),
-                    onBackClick = { backClicked = true }
+                    viewModel =
+                        viewModel(
+                            factory =
+                                SetLoggingViewModel.provideFactory(
+                                    repository,
+                                    exerciseId = 1,
+                                ),
+                        ),
+                    onBackClick = { backClicked = true },
                 )
             }
         }

@@ -17,22 +17,21 @@ fun AddExerciseInput(
     exerciseName: String,
     onExerciseNameChange: (String) -> Unit,
     onAddClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = exerciseName,
             onValueChange = onExerciseNameChange,
             label = { Text("Exercise Name") },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
         Spacer(modifier = Modifier.width(8.dp))
         Button(
             onClick = onAddClick,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
         ) {
             Text("Add")
         }
     }
 }
-

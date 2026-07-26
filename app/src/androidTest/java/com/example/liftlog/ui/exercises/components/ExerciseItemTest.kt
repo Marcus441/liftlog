@@ -26,7 +26,7 @@ class ExerciseItemTest {
                 ExerciseItem(
                     exercise = ExerciseEntity(id = 1, name = "Bench Press"),
                     onDelete = {},
-                    onClick = {}
+                    onClick = {},
                 )
             }
         }
@@ -43,7 +43,7 @@ class ExerciseItemTest {
                 ExerciseItem(
                     exercise = ExerciseEntity(id = 1, name = "Bench Press"),
                     onDelete = {},
-                    onClick = { clicked = true }
+                    onClick = { clicked = true },
                 )
             }
         }
@@ -62,7 +62,7 @@ class ExerciseItemTest {
                 ExerciseItem(
                     exercise = ExerciseEntity(id = 1, name = "Bench Press"),
                     onDelete = { deleted = true },
-                    onClick = {}
+                    onClick = {},
                 )
             }
         }

@@ -30,7 +30,7 @@ class LogSetInputTest {
                     onWeightChange = {},
                     repsInput = "8",
                     onRepsChange = {},
-                    onButtonClick = {}
+                    onButtonClick = {},
                 )
             }
         }
@@ -49,7 +49,7 @@ class LogSetInputTest {
                     onWeightChange = { weight = it },
                     repsInput = "",
                     onRepsChange = {},
-                    onButtonClick = {}
+                    onButtonClick = {},
                 )
             }
         }
@@ -69,7 +69,7 @@ class LogSetInputTest {
                     onWeightChange = {},
                     repsInput = reps,
                     onRepsChange = { reps = it },
-                    onButtonClick = {}
+                    onButtonClick = {},
                 )
             }
         }
@@ -90,7 +90,7 @@ class LogSetInputTest {
                     onWeightChange = {},
                     repsInput = "8",
                     onRepsChange = {},
-                    onButtonClick = { clicked = true }
+                    onButtonClick = { clicked = true },
                 )
             }
         }

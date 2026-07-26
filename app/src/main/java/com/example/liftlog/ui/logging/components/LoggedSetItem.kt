@@ -12,13 +12,17 @@ import androidx.compose.ui.unit.dp
 import com.example.liftlog.data.local.entities.LogSetEntity
 
 @Composable
-fun LoggedSetItem(set: LogSetEntity, modifier: Modifier = Modifier) {
+fun LoggedSetItem(
+    set: LogSetEntity,
+    modifier: Modifier = Modifier,
+) {
     Card(modifier = modifier.fillMaxWidth()) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text("${set.weight} kg")
             Text("${set.reps} reps")
